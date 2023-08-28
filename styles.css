@@ -42,10 +42,14 @@ button{
     width: 85%;
 }
 
+button.active{
+    color: var(--primary-light);
+    background-color: var(--primary-dark);
+}
+
 body{
     background-color: var(--primary-light);
-    height: 75%;
-    border: 2px solid purple;
+    height: 80%;
 }
 
 .main{
@@ -53,6 +57,7 @@ body{
     width: 75%;
     height: 75%;
     margin: auto;    
+    justify-content: center;
 }
 
 #input{
@@ -66,7 +71,11 @@ body{
 #sketchBox{
     display: flex;
     /* border: 2px solid red; */
-    flex-basis: 75%;
+    /* flex-basis: 75%; */
+    height: 400px;
+    width: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
     background-color: var(--secondary-light);
 }
 
@@ -78,6 +87,5 @@ body{
 }
 
 .cell{
-    border: 1px solid purple;
     flex: 1;
 }

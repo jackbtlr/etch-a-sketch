@@ -4,8 +4,9 @@ const colorSelect = document.querySelector('#colorSelect');
 const slider = document.querySelector('#slider');
 const sketchSize = document.querySelector('#sketchSize');
 const eraser = document.querySelector('#eraser');
-const colorMode = document.querySelector('#colorMode');
+const colorMode = document.querySelector('#color');
 const rainbowMode = document.querySelector('#rainbow');
+const modes = document.querySelectorAll('.mode');
 let mode = 'color';
 let drawColor = '#333';
 let mouseDown = false;
@@ -50,6 +51,20 @@ function randomColor(){
   return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
+function changeActiveButton(){
+  colorMode.classList.toggle('active');
+  rainbowMode.classList.toggle('active');
+  eraser.classList.toggle('active');
+}
+
+function selectMode(e){
+  let oldButton = document.querySelector(`#${mode}`)
+  let newButton = document.querySelector(`#${e.target.id}`);
+  newButton.classList.add('active');
+  oldButton.classList.remove('active');
+  mode = e.target.id;
+}
+
 slider.addEventListener('input', (e) => {
   let sideLength = parseInt(e.target.value);
   sketchSize.innerText = `${sideLength} x ${sideLength}`;
@@ -60,14 +75,13 @@ clearButton.addEventListener('click', clearGraph);
 colorSelect.addEventListener('input', (e) => {
   drawColor = e.target.value;
 });
-eraser.addEventListener('click', () => {
-  mode = 'eraser';
-});
-colorMode.addEventListener('click', () =>{
-  mode = 'color';
-})
-rainbowMode.addEventListener('click', () => {
-  mode = 'rainbow';
-})
+
+for (let modeButton of modes){
+  modeButton.addEventListener('click', (e) => {
+    if(e.target.id !== mode){
+      selectMode(e);
+    }
+  });
+}
 
 drawGraph(16);
